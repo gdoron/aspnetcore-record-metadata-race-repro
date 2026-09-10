@@ -28,8 +28,7 @@ type's primary constructor must have a property to read the value.
 The record is well-formed, the property exists, and the same binary serves the same request shape
 correctly on every other instance. Restarting the affected instance clears it; nothing else does.
 
-We hit this in production: one pod out of a fleet threw 1352 of these in six minutes, across nine
-tenants and every request that touched the type, from twenty seconds after the pod came up until it
+We hit this in production: one pod out of a fleet threw 1352 of these in six minutes, every request that touched the type, from twenty seconds after the pod came up until it
 left rotation. No other pod on the same build was ever affected. That matches the report in #59384 —
 one instance of a load-balanced pair, restart resolves it.
 
